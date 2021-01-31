@@ -12,7 +12,7 @@ function getRandomFromRange (min, max) {
 
   if (min > max) {
     let swap = min;
-    mim = max;
+    min = max;
     max = swap;
   }
 
@@ -32,3 +32,7 @@ function checkCommentLength (comment, maxCommentLength) {
 
   return isCommentFits;
 }
+
+getRandomFromRange(1, 9);
+
+checkCommentLength('sjdfeiugksufhksdufhsdkuhfskfhjk', 200);
