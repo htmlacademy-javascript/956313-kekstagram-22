@@ -2,23 +2,13 @@
 // Диапазон может быть только положительный, включая ноль
 
 function getRandomFromRange (min, max) {
-  if (min < 0) {
-    min = 0;
+  let result = null;
+  if (Number.isInteger(min) && Number.isInteger(max)) {
+    if (min > 0 && max > 0 && min < max) {
+      result = Math.floor(Math.random() * (max - min + 1) + min);
+    }
   }
-
-  if (max < 0) {
-    max = 0;
-  }
-
-  if (min > max) {
-    let swap = min;
-    min = max;
-    max = swap;
-  }
-
-  let random = Math.floor(Math.random() * (max - min + 1) + min);
-
-  return random;
+  return result;
 }
 
 // Проверка максимальной длины комментария
@@ -33,6 +23,6 @@ function checkCommentLength (comment, maxCommentLength) {
   return isCommentFits;
 }
 
-getRandomFromRange(1, 9);
+getRandomFromRange(0, 9);
 
 checkCommentLength('sjdfeiugksufhksdufhsdkuhfskfhjk', 200);
