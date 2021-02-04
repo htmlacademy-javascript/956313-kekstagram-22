@@ -16,7 +16,7 @@ function getRandomFromRange (min, max) {
 function checkCommentLength (comment, maxCommentLength) {
   let isCommentFits = null;
   if (typeof comment === 'string' && typeof maxCommentLength === 'number') {
-    isCommentFits = (comment.length <= maxCommentLength) ? true : false;
+    isCommentFits = (comment.length <= maxCommentLength);
   }
   return isCommentFits;
 }
