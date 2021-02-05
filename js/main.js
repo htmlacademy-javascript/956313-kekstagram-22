@@ -18,6 +18,8 @@ function checkCommentLength (comment, maxCommentLength) {
   return isCommentFits;
 }
 
+checkCommentLength('safwaf', 123)
+
 const NAMES = [
   'Иван',
   'Себастьян',
@@ -53,29 +55,36 @@ function getRandomArrayElement (array) {
   return array[getRandomFromRange(0, array.length - 1)];
 }
 
-function generatePhoto () {
-  return {
-    id: '',
-    url: '',
-    description: getRandomArrayElement(DESCRIPTIONS),
-    likes: getRandomFromRange(15, 200),
-    comments: {
-      id: '',
+function generateComments () {
+  const COMMENT_COUNT = getRandomFromRange(1, 5);
+  let comments = [];
+
+  for (let i = 1; i <= COMMENT_COUNT; i++) {
+    comments.push({
+      id: i,
       avatar: 'img/avatar-' + getRandomFromRange(1, 6) + '.svg',
       message: getRandomArrayElement(MESSAGES),
       name: getRandomArrayElement(NAMES),
-    },
+    });
   }
+
+  return comments;
 }
 
 function generatePhotosArray () {
-  let photos = new Array(PHOTOS_COUNT).fill(null).map(() => generatePhoto());
-  for (let i = 0; i < photos.length; i++) {
-    photos[i].id = i + 1;
-    photos[i].url = 'photos/' + (i + 1) + '.jpg';
+  let photos = [];
+
+  for (let i = 1; i <= PHOTOS_COUNT; i++) {
+    photos.push({
+      id: i,
+      url: 'photos/' + i + '.jpg',
+      description: getRandomArrayElement(DESCRIPTIONS),
+      likes: getRandomFromRange(15, 200),
+      comments: generateComments(),
+    })
   }
-  //id комментария
+
   return photos;
 }
 
-console.log(generatePhotosArray());
+generatePhotosArray();
