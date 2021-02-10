@@ -1,11 +1,10 @@
 function getRandomFromRange (min, max) {
-  let result = null;
   if (Number.isInteger(min) && Number.isInteger(max)) {
     if (min >= 0 && max >= 0 && min <= max) {
-      result = Math.floor(Math.random() * (max - min + 1) + min);
+      return (Math.floor(Math.random() * (max - min + 1) + min));
     }
   }
-  return result;
+  return null;
 }
 
 function getRandomArrayElement (array) {
@@ -13,11 +12,10 @@ function getRandomArrayElement (array) {
 }
 
 function checkStringLength (comment, maxStringLength) {
-  let isCommentFits = null;
   if (typeof comment === 'string' && typeof maxStringLength === 'number') {
-    isCommentFits = (comment.length <= maxStringLength);
+    return (comment.length <= maxStringLength);
   }
-  return isCommentFits;
+  return null;
 }
 
 checkStringLength('safwaf', 123)
