@@ -1,3 +1,5 @@
 'use strict'
 
-import './generate-data.js';
+import {generatePhotosArray} from './generate-data.js';
+
+generatePhotosArray();

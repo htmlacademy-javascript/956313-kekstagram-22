@@ -63,4 +63,4 @@ function generatePhotosArray () {
   return photos;
 }
 
-generatePhotosArray();
+export {generatePhotosArray};

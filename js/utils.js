@@ -12,14 +12,14 @@ function getRandomArrayElement (array) {
   return array[getRandomFromRange(0, array.length - 1)];
 }
 
-function checkCommentLength (comment, maxCommentLength) {
+function checkStringLength (comment, maxStringLength) {
   let isCommentFits = null;
-  if (typeof comment === 'string' && typeof maxCommentLength === 'number') {
-    isCommentFits = (comment.length <= maxCommentLength);
+  if (typeof comment === 'string' && typeof maxStringLength === 'number') {
+    isCommentFits = (comment.length <= maxStringLength);
   }
   return isCommentFits;
 }
 
-checkCommentLength('safwaf', 123)
+checkStringLength('safwaf', 123)
 
 export {getRandomFromRange, getRandomArrayElement};
