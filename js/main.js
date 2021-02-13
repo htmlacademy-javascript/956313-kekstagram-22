@@ -1,5 +1,6 @@
 'use strict'
 
+import {createPictures} from './create-content.js';
 import {generatePhotosArray} from './generate-data.js';
 
-generatePhotosArray();
+createPictures(generatePhotosArray());
