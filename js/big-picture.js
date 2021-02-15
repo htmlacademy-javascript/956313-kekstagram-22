@@ -1,4 +1,4 @@
-import {generatePhotosArray} from './generate-data.js'
+import {generatePhotosArray} from './random-data.js'
 
 const picturesData = generatePhotosArray();
 const bigPicture = document.querySelector('.big-picture');
