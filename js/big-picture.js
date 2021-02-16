@@ -18,6 +18,21 @@ function renderBigPictureData (pictureData) {
   bigPictureCommentCountElement.textContent = pictureData.comments.length;
 }
 
+function createCommentTamplate () {
+  const commentTempalteHtml = `
+    <li class="social__comment">
+      <img
+        class="social__picture"
+        src=""
+        alt=""
+        width="35" height="35">
+      <p class="social__text"></p>
+    </li>`;
+  let template = document.createElement('template');
+  template.innerHTML = commentTempalteHtml;
+  return template.content.querySelector('.social__comment');
+}
+
 function clearComments (comments) {
   while (comments.firstChild) {
     comments.removeChild(comments.firstChild);
@@ -25,8 +40,16 @@ function clearComments (comments) {
 }
 
 function createCommentElement (pictureData) {
-
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < pictureData.comments.length; i++) {
+    const newComment = document.createElement('li');
+    newComment.classList.add('social__comment');
+    newComment.innerHTML = '<img class="social__picture" src="img/avatar-4.svg" alt="Аватар комментатора фотографии" width="35" height="35">'
+    fragment.appendChild(newComment);
+  }
 }
+
+// createCommentElement();
 
 function setupBigPicture () {
   bigPicture.classList.remove('hidden');
