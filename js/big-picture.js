@@ -19,7 +19,13 @@ function renderBigPictureData (pictureData) {
 }
 
 function clearComments (comments) {
-  comments.innerHTML = '';
+  while (comments.firstChild) {
+    comments.removeChild(comments.firstChild);
+  }
+}
+
+function createCommentElement (pictureData) {
+
 }
 
 function setupBigPicture () {
