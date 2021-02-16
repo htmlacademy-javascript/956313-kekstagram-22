@@ -18,6 +18,12 @@ function renderBigPictureData (pictureData) {
   bigPictureCommentCountElement.textContent = pictureData.comments.length;
 }
 
+function clearComments (comments) {
+  while (comments.firstChild) {
+    comments.removeChild(comments.firstChild);
+  }
+}
+
 function createCommentTamplate () {
   const commentTempalteHtml = `
     <li class="social__comment">
@@ -33,23 +39,23 @@ function createCommentTamplate () {
   return template.content.querySelector('.social__comment');
 }
 
-function clearComments (comments) {
-  while (comments.firstChild) {
-    comments.removeChild(comments.firstChild);
-  }
+const commentTemplate = createCommentTamplate();
+
+function createCommentElement (commentData) {
+  let comment = commentTemplate.cloneNode(true);
+  comment.querySelector('.social__picture').src = commentData.avatar;
+  comment.querySelector('.social__picture').alt = commentData.name;
+  comment.querySelector('.social__text').innerText = commentData.message;
+  return comment;
 }
 
-function createCommentElement (pictureData) {
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < pictureData.comments.length; i++) {
-    const newComment = document.createElement('li');
-    newComment.classList.add('social__comment');
-    newComment.innerHTML = '<img class="social__picture" src="img/avatar-4.svg" alt="Аватар комментатора фотографии" width="35" height="35">'
-    fragment.appendChild(newComment);
-  }
+function createComments (commentsData) {
+  let fragment = document.createDocumentFragment();
+  commentsData.forEach(element => {
+    fragment.appendChild(createCommentElement(element))
+  });
+  commentsList.appendChild(fragment);
 }
-
-// createCommentElement();
 
 function setupBigPicture () {
   bigPicture.classList.remove('hidden');
@@ -57,8 +63,8 @@ function setupBigPicture () {
   clearComments(commentsList);
   bigPictureCommentCount.classList.add('hidden');
   bigPictureCommentsLoader.classList.add('hidden');
-
   renderBigPictureData(picturesData[0]);
+  createComments(picturesData[0].comments)
 }
 
 export {setupBigPicture};
