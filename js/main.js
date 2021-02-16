@@ -1,8 +1,9 @@
 'use strict'
 
 import {createPictures} from './pictures-preview.js';
-import {generatePhotosArray} from './random-data.js';
-import {showBigPicture} from './big-picture.js';
+import {generatePhotos} from './random-data.js';
+import {setupBigPicture} from './big-picture.js';
 
-createPictures(generatePhotosArray());
-showBigPicture();
+const data = generatePhotos();
+createPictures(data);
+setupBigPicture(data[0]);
