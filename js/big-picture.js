@@ -1,4 +1,5 @@
 import {generatePhotos} from './random-data.js'
+import {isEscEvent} from './utils.js'
 
 const picturesData = generatePhotos();
 const bigPicture = document.querySelector('.big-picture');
@@ -9,10 +10,11 @@ const bigPictureCommentCountElement = bigPicture.querySelector('.comments-count'
 const bigPictureCommentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureLikesCount = bigPicture.querySelector('.likes-count');
 const body = document.querySelector('body');
-let commentsList = document.querySelector('.social__comments');
+let commentsList = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
+const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
 
 function clearComments (comments) {
   while (comments.firstChild) {
@@ -52,5 +54,19 @@ function setupBigPicture () {
   bigPictureCommentsLoader.classList.add('hidden');
   renderBigPictureData(picturesData[0]);
 }
+
+bigPictureClose.addEventListener('click', function() {
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
+});
 
 export {setupBigPicture};
