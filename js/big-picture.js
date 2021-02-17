@@ -10,36 +10,15 @@ const bigPictureCommentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureLikesCount = bigPicture.querySelector('.likes-count');
 const body = document.querySelector('body');
 let commentsList = document.querySelector('.social__comments');
-
-function renderBigPictureData (pictureData) {
-  bigPictureImage.src = pictureData.url;
-  bigPictureLikesCount.textContent = pictureData.likes;
-  bigPictureDescription.textContent = pictureData.description;
-  bigPictureCommentCountElement.textContent = pictureData.comments.length;
-}
+const commentTemplate = document.querySelector('#comment')
+  .content
+  .querySelector('.social__comment');
 
 function clearComments (comments) {
   while (comments.firstChild) {
     comments.removeChild(comments.firstChild);
   }
 }
-
-function createCommentTamplate () {
-  const commentTempalteHtml = `
-    <li class="social__comment">
-      <img
-        class="social__picture"
-        src=""
-        alt=""
-        width="35" height="35">
-      <p class="social__text"></p>
-    </li>`;
-  let template = document.createElement('template');
-  template.innerHTML = commentTempalteHtml;
-  return template.content.querySelector('.social__comment');
-}
-
-const commentTemplate = createCommentTamplate();
 
 function createCommentElement (commentData) {
   let comment = commentTemplate.cloneNode(true);
@@ -57,6 +36,14 @@ function createComments (commentsData) {
   commentsList.appendChild(fragment);
 }
 
+function renderBigPictureData (pictureData) {
+  bigPictureImage.src = pictureData.url;
+  bigPictureLikesCount.textContent = pictureData.likes;
+  bigPictureDescription.textContent = pictureData.description;
+  bigPictureCommentCountElement.textContent = pictureData.comments.length;
+  createComments(pictureData.comments);
+}
+
 function setupBigPicture () {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -64,7 +51,6 @@ function setupBigPicture () {
   bigPictureCommentCount.classList.add('hidden');
   bigPictureCommentsLoader.classList.add('hidden');
   renderBigPictureData(picturesData[0]);
-  createComments(picturesData[0].comments)
 }
 
 export {setupBigPicture};

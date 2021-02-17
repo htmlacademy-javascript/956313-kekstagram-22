@@ -6,4 +6,4 @@ import {setupBigPicture} from './big-picture.js';
 
 const data = generatePhotos();
 createPictures(data);
-setupBigPicture(data[0]);
+setupBigPicture();
