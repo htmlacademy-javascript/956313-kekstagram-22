@@ -1,6 +1,5 @@
-import {generatePhotos} from './random-data.js'
+import {isEscEvent} from './utils.js'
 
-const picturesData = generatePhotos();
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImage = bigPicture.querySelector('img');
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
@@ -9,37 +8,17 @@ const bigPictureCommentCountElement = bigPicture.querySelector('.comments-count'
 const bigPictureCommentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureLikesCount = bigPicture.querySelector('.likes-count');
 const body = document.querySelector('body');
-let commentsList = document.querySelector('.social__comments');
-
-function renderBigPictureData (pictureData) {
-  bigPictureImage.src = pictureData.url;
-  bigPictureLikesCount.textContent = pictureData.likes;
-  bigPictureDescription.textContent = pictureData.description;
-  bigPictureCommentCountElement.textContent = pictureData.comments.length;
-}
+let commentsList = bigPicture.querySelector('.social__comments');
+const commentTemplate = document.querySelector('#comment')
+  .content
+  .querySelector('.social__comment');
+const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
 
 function clearComments (comments) {
   while (comments.firstChild) {
     comments.removeChild(comments.firstChild);
   }
 }
-
-function createCommentTamplate () {
-  const commentTempalteHtml = `
-    <li class="social__comment">
-      <img
-        class="social__picture"
-        src=""
-        alt=""
-        width="35" height="35">
-      <p class="social__text"></p>
-    </li>`;
-  let template = document.createElement('template');
-  template.innerHTML = commentTempalteHtml;
-  return template.content.querySelector('.social__comment');
-}
-
-const commentTemplate = createCommentTamplate();
 
 function createCommentElement (commentData) {
   let comment = commentTemplate.cloneNode(true);
@@ -57,14 +36,35 @@ function createComments (commentsData) {
   commentsList.appendChild(fragment);
 }
 
-function setupBigPicture () {
+function renderBigPictureData (pictureData) {
+  bigPictureImage.src = pictureData.url;
+  bigPictureLikesCount.textContent = pictureData.likes;
+  bigPictureDescription.textContent = pictureData.description;
+  bigPictureCommentCountElement.textContent = pictureData.comments.length;
+  createComments(pictureData.comments);
+}
+
+function setupBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   clearComments(commentsList);
   bigPictureCommentCount.classList.add('hidden');
   bigPictureCommentsLoader.classList.add('hidden');
-  renderBigPictureData(picturesData[0]);
-  createComments(picturesData[0].comments)
+  renderBigPictureData(pictureData);
 }
+
+bigPictureClose.addEventListener('click', function() {
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+});
+
+document.addEventListener('keydown', function(evt) {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    bigPicture.classList.add('hidden');
+    body.classList.remove('modal-open');
+  }
+});
 
 export {setupBigPicture};
