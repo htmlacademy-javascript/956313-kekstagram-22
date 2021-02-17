@@ -1,7 +1,5 @@
-import {generatePhotos} from './random-data.js'
 import {isEscEvent} from './utils.js'
 
-const picturesData = generatePhotos();
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImage = bigPicture.querySelector('img');
 const bigPictureDescription = bigPicture.querySelector('.social__caption');
@@ -46,13 +44,13 @@ function renderBigPictureData (pictureData) {
   createComments(pictureData.comments);
 }
 
-function setupBigPicture () {
+function setupBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   clearComments(commentsList);
   bigPictureCommentCount.classList.add('hidden');
   bigPictureCommentsLoader.classList.add('hidden');
-  renderBigPictureData(picturesData[0]);
+  renderBigPictureData(pictureData);
 }
 
 bigPictureClose.addEventListener('click', function() {
