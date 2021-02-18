@@ -18,6 +18,10 @@ function checkStringLength (comment, maxStringLength) {
   return null;
 }
 
+function isEscEvent (evt) {
+  return evt.key === ('Escape' || 'Esc');
+}
+
 checkStringLength('safwaf', 123)
 
-export {getRandomFromRange, getRandomArrayElement};
+export {getRandomFromRange, getRandomArrayElement, isEscEvent};

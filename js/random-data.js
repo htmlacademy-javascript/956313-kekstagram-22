@@ -47,7 +47,7 @@ function generateComments () {
   return comments;
 }
 
-function generatePhotosArray () {
+function generatePhotos () {
   let photos = [];
 
   for (let i = 1; i <= PHOTOS_COUNT; i++) {
@@ -63,4 +63,4 @@ function generatePhotosArray () {
   return photos;
 }
 
-export {generatePhotosArray};
+export {generatePhotos};
