@@ -1,12 +1,12 @@
 import {isEscEvent} from './utils.js'
 
 const bigPicture = document.querySelector('.big-picture');
-const bigPictureImage = bigPicture.querySelector('img');
-const bigPictureDescription = bigPicture.querySelector('.social__caption');
-const bigPictureCommentCount = bigPicture.querySelector('.social__comment-count');
-const bigPictureCommentCountElement = bigPicture.querySelector('.comments-count');
-const bigPictureCommentsLoader = bigPicture.querySelector('.comments-loader');
-const bigPictureLikesCount = bigPicture.querySelector('.likes-count');
+const image = bigPicture.querySelector('img');
+const imageDescription = bigPicture.querySelector('.social__caption');
+const commentCount = bigPicture.querySelector('.social__comment-count');
+const commentCountElement = bigPicture.querySelector('.comments-count');
+const commentsLoader = bigPicture.querySelector('.comments-loader');
+const likesCount = bigPicture.querySelector('.likes-count');
 const body = document.querySelector('body');
 let commentsList = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment')
@@ -38,18 +38,18 @@ function createComments (commentsData) {
 }
 
 function renderBigPictureData (pictureData) {
-  bigPictureImage.src = pictureData.url;
-  bigPictureLikesCount.textContent = pictureData.likes;
-  bigPictureDescription.textContent = pictureData.description;
-  bigPictureCommentCountElement.textContent = pictureData.comments.length;
+  image.src = pictureData.url;
+  likesCount.textContent = pictureData.likes;
+  imageDescription.textContent = pictureData.description;
+  commentCountElement.textContent = pictureData.comments.length;
   createComments(pictureData.comments);
 }
 
 function showBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  bigPictureCommentCount.classList.add('hidden');
-  bigPictureCommentsLoader.classList.add('hidden');
+  commentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
   renderBigPictureData(pictureData);
 }
 
