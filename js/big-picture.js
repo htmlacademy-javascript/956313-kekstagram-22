@@ -29,6 +29,7 @@ function createCommentElement (commentData) {
 }
 
 function createComments (commentsData) {
+  clearComments(commentsList);
   let fragment = document.createDocumentFragment();
   commentsData.forEach(element => {
     fragment.appendChild(createCommentElement(element))
@@ -47,7 +48,6 @@ function renderBigPictureData (pictureData) {
 function setupBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  clearComments(commentsList);
   bigPictureCommentCount.classList.add('hidden');
   bigPictureCommentsLoader.classList.add('hidden');
   renderBigPictureData(pictureData);
