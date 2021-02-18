@@ -65,8 +65,7 @@ closeButton.addEventListener('click', function() {
 document.addEventListener('keydown', function(evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
+    hideBigPicture();
   }
 });
 
