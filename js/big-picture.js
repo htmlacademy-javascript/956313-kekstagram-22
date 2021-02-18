@@ -12,7 +12,7 @@ let commentsList = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
-const bigPictureClose = bigPicture.querySelector('.big-picture__cancel');
+const closeButton = bigPicture.querySelector('.big-picture__cancel');
 
 function clearComments (comments) {
   while (comments.firstChild) {
@@ -45,7 +45,7 @@ function renderBigPictureData (pictureData) {
   createComments(pictureData.comments);
 }
 
-function setupBigPicture (pictureData) {
+function showBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   bigPictureCommentCount.classList.add('hidden');
@@ -53,10 +53,13 @@ function setupBigPicture (pictureData) {
   renderBigPictureData(pictureData);
 }
 
-bigPictureClose.addEventListener('click', function() {
+function hideBigPicture () {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
+}
 
+closeButton.addEventListener('click', function() {
+  hideBigPicture();
 });
 
 document.addEventListener('keydown', function(evt) {
@@ -67,4 +70,4 @@ document.addEventListener('keydown', function(evt) {
   }
 });
 
-export {setupBigPicture};
+export {showBigPicture};
